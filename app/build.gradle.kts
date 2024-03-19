@@ -2,8 +2,6 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
-
-
 }
 
 android {
@@ -69,6 +67,12 @@ dependencies {
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.koin.android)
+
+    //Module
+    implementation(project(":data"))
+    implementation(project(":domain"))
+    implementation(project(":feature:test"))
 
 
 }

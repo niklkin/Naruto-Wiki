@@ -1,5 +1,8 @@
 package com.data.di
 
+import com.data.remote.NarutoApi
+import com.data.repositories.KtorNetworkRepository
+import com.domain.repository.NetworkRepository
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
 import io.ktor.client.plugins.DefaultRequest
@@ -14,11 +17,13 @@ import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val DataModule = module {
     singleOf(::provideHttpClient)
-
+    singleOf(::NarutoApi)
+    singleOf(::KtorNetworkRepository) bind NetworkRepository::class
 }
 private const val NETWORK_TIME_OUT = 6_000L
 
@@ -44,7 +49,6 @@ private fun provideHttpClient() = HttpClient(Android) {
     install(DefaultRequest) {
         header(HttpHeaders.ContentType, ContentType.Application.Json)
     }
-
     defaultRequest {
         contentType(ContentType.Application.Json)
         accept(ContentType.Application.Json)

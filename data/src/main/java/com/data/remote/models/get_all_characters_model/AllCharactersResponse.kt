@@ -4,8 +4,9 @@ package com.data.remote.models.get_all_characters_model
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import androidx.annotation.Keep
+import com.domain.models.get_all_characters_model.Character
 
-@Keep
+
 @Serializable
 data class AllCharactersResponse(
     @SerialName("characters")

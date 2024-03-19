@@ -4,8 +4,13 @@ package com.data.remote.models.get_all_characters_model
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import androidx.annotation.Keep
+import com.domain.models.get_all_characters_model.Debut
+import com.domain.models.get_all_characters_model.Family
+import com.domain.models.get_all_characters_model.Personal
+import com.domain.models.get_all_characters_model.Rank
+import com.domain.models.get_all_characters_model.VoiceActors
 
-@Keep
+
 @Serializable
 data class Character(
     @SerialName("debut")

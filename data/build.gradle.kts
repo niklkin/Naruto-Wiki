@@ -52,5 +52,6 @@ dependencies {
 
     implementation(libs.koin.android)
 
+    implementation(project(":domain"))
 
 }

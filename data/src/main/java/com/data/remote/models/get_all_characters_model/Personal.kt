@@ -4,8 +4,11 @@ package com.data.remote.models.get_all_characters_model
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import androidx.annotation.Keep
+import com.domain.models.get_all_characters_model.Age
+import com.domain.models.get_all_characters_model.Height
+import com.domain.models.get_all_characters_model.Weight
 
-@Keep
+
 @Serializable
 data class Personal(
     @SerialName("affiliation")

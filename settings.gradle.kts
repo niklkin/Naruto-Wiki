@@ -16,3 +16,5 @@ dependencyResolutionManagement {
 rootProject.name = "Naruto Wiki"
 include(":app")
 include(":data")
+include(":domain")
+include(":feature:test")
