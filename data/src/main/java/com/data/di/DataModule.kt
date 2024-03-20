@@ -36,7 +36,8 @@ private fun provideHttpClient() = HttpClient(Android) {
                 useAlternativeNames = true
                 ignoreUnknownKeys = true
                 encodeDefaults = false
-            }
+            },
+            contentType = ContentType.Any
         )
     }
 

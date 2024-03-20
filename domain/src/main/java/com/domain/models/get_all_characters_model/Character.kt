@@ -9,5 +9,5 @@ import androidx.annotation.Keep
 @Serializable
 data class Character(
     @SerialName("name")
-    val name: String? = "",
+    val name: String = "",
 )

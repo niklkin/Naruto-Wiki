@@ -2,8 +2,12 @@ package com.test
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.domain.models.get_all_characters_model.AllCharactersResponse
+import com.domain.models.get_all_characters_model.Character
 import com.domain.repository.NetworkRepository
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -19,9 +23,9 @@ class TestScreenViewModel(
     }
 
     fun getAllCharacters() = viewModelScope.launch {
-        networkRepository.getCharacters().collect {
+        networkRepository.getCharacters().let {
             _state.value = state.value.copy(
-                charactersResponse = it
+                charactersPaged = it
             )
         }
     }
@@ -29,5 +33,5 @@ class TestScreenViewModel(
 }
 
 data class TestScreenState(
-    val charactersResponse: AllCharactersResponse = AllCharactersResponse()
+    val charactersPaged: Flow<PagingData<Character>>? = null
 )

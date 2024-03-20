@@ -13,8 +13,10 @@ appcompat = "1.6.1"
 material = "1.11.0"
 koin = "3.5.0"
 kotlinx-serialization-json = "1.0.1"
+paging-compose = "3.3.0-alpha02"
 
 [libraries]
+androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "paging-compose" }
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }

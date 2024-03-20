@@ -9,11 +9,11 @@ import androidx.annotation.Keep
 @Serializable
 data class AllCharactersResponse(
     @SerialName("characters")
-    val characters: List<Character?>? = listOf(),
+    val characters: List<Character> = listOf(),
     @SerialName("currentPage")
-    val currentPage: Int? = 0,
+    val currentPage: Int = 0,
     @SerialName("pageSize")
-    val pageSize: Int? = 0,
+    val pageSize: Int = 0,
     @SerialName("totalCharacters")
-    val totalCharacters: Int? = 0
+    val totalCharacters: Int = 0
 )

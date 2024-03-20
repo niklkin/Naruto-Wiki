@@ -68,6 +68,8 @@ dependencies {
     debugImplementation(libs.ui.test.manifest)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.koin.android)
+    implementation (libs.androidx.paging.compose)
+
 
     //Module
     implementation(project(":data"))

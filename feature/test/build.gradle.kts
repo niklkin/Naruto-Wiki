@@ -58,6 +58,8 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
+    implementation (libs.androidx.paging.compose)
+
 
     //Module
     implementation(project(":domain"))

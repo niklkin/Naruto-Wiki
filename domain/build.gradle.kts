@@ -48,6 +48,8 @@ dependencies {
 
     implementation(libs.koin.android)
 
+    implementation (libs.androidx.paging.compose)
+
 
 
 }
