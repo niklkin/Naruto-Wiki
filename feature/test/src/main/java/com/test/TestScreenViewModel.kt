@@ -2,10 +2,8 @@ package com.test
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.domain.models.get_all_characters_model.AllCharactersResponse
-import com.domain.models.get_all_characters_model.Character
+import com.domain.entity.get_all_characters_model.Character
 import com.domain.repository.NetworkRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

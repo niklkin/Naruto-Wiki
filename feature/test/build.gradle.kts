@@ -59,6 +59,7 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
     implementation (libs.androidx.paging.compose)
+    implementation("io.coil-kt:coil-compose:2.6.0")
 
 
     //Module
