@@ -13,6 +13,7 @@ appcompat = "1.6.1"
 material = "1.11.0"
 koin = "3.5.0"
 kotlinx-serialization-json = "1.0.1"
+orbit-core = "7.0.0"
 paging-compose = "3.3.0-alpha02"
 
 [libraries]
@@ -24,6 +25,9 @@ espresso-core = { group = "androidx.test.espresso", name = "espresso-core", vers
 lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx" }
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
+orbit-compose = { module = "org.orbit-mvi:orbit-compose", version.ref = "orbit-core" }
+orbit-core = { module = "org.orbit-mvi:orbit-core", version.ref = "orbit-core" }
+orbit-viewmodel = { module = "org.orbit-mvi:orbit-viewmodel", version.ref = "orbit-core" }
 ui = { group = "androidx.compose.ui", name = "ui" }
 ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }

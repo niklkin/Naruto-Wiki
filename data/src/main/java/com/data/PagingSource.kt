@@ -1,14 +1,8 @@
 package com.data
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import io.ktor.client.HttpClient
-import io.ktor.client.call.body
-import io.ktor.client.request.HttpRequestBuilder
-import io.ktor.client.request.request
-import io.ktor.client.statement.bodyAsText
-import io.ktor.http.HttpStatusCode
+import com.data.remote.Result
 
 open class ResultPagingSource<T : Any>(private val pagingData: suspend (page: Int, pageSize: Int) -> Result<List<T>>) :
     PagingSource<Int, T>() {
@@ -42,29 +36,3 @@ open class ResultPagingSource<T : Any>(private val pagingData: suspend (page: In
         }
 }
 
-suspend inline fun <reified T> HttpClient.getResults(
-    block: HttpRequestBuilder.() -> Unit
-): Result<T> = try {
-    val response = request(block)
-    if (response.status == HttpStatusCode.OK) {
-        Log.d("TAG", "getResults: ${response.bodyAsText()}")
-        Result.Success(response.body())
-    } else {
-        Result.Error(Throwable("${response.status}: ${response.bodyAsText()}"))
-    }
-} catch (e: Exception) {
-    Result.Error(e)
-}
-
-sealed interface Result<out T> {
-    class Success<out T>(val value: T) : Result<T>
-    data object Loading : Result<Nothing>
-    class Error(val throwable: Throwable) : Result<Nothing>
-}
-
-inline fun <T, R> Result<T>.map(transform: (value: T) -> R): Result<R> =
-    when (this) {
-        is Result.Success -> Result.Success(transform(value))
-        is Result.Error -> Result.Error(throwable)
-        is Result.Loading -> Result.Loading
-    }

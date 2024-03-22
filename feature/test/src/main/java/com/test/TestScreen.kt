@@ -13,10 +13,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
@@ -30,12 +32,13 @@ import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.SubcomposeAsyncImage
 import org.koin.androidx.compose.koinViewModel
+import org.orbitmvi.orbit.compose.collectAsState
 
 @Composable
 fun TestScreen() {
     val viewModel = koinViewModel<TestScreenViewModel>()
-    val state by viewModel.state.collectAsState()
-    val characters by rememberUpdatedState(newValue = state.charactersPaged?.collectAsLazyPagingItems())
+    val state by viewModel.collectAsState()
+    val characters by rememberUpdatedState(newValue = state.charactersPaged.collectAsLazyPagingItems())
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -66,13 +69,23 @@ fun TestScreen() {
                                     .size(150.dp),
                                 model = it.images.firstOrNull() ?: "",
                                 contentDescription = null,
-                                contentScale = ContentScale.Crop
+                                contentScale = ContentScale.Crop,
+                                error = {
+                                    Icon(
+                                        imageVector = Icons.Default.AccountCircle,
+                                        contentDescription = null,
+                                        modifier = Modifier.size(150.dp)
+                                    )
+                                },
+                                loading = {
+                                    CircularProgressIndicator()
+                                }
                             )
                         }
                     }
                 }
             }
-        characters!!.loadState.apply {
+        characters.loadState.apply {
             when {
                 refresh is LoadState.NotLoading && characters!!.itemCount < 1 -> {
                     item {

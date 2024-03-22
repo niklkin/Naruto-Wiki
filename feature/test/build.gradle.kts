@@ -58,12 +58,16 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
-    implementation (libs.androidx.paging.compose)
+    implementation(libs.androidx.paging.compose)
     implementation("io.coil-kt:coil-compose:2.6.0")
+    implementation("org.orbit-mvi:orbit-core:7.0.0")
+    implementation("org.orbit-mvi:orbit-viewmodel:7.0.0")
+    implementation("org.orbit-mvi:orbit-compose:7.0.0")
 
 
     //Module
-    implementation(project(":domain"))
+    implementation(projects.domain)
+    implementation(projects.core)
 
 
 }
