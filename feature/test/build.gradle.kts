@@ -1,25 +1,14 @@
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.kotlinxSerialization)
+
 }
 
 android {
-    namespace = "com.example.myapplication"
+    namespace = "com.test"
     compileSdk = 34
-
-    defaultConfig {
-        applicationId = "com.example.myapplication"
-        minSdk = 24
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
-    }
 
     buildTypes {
         release {
@@ -68,15 +57,17 @@ dependencies {
     debugImplementation(libs.ui.test.manifest)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.koin.android)
-    implementation (libs.androidx.paging.compose)
-    implementation(libs.orbit.core)
-    implementation(libs.orbit.viewmodel)
-    implementation(libs.orbit.compose)
+    implementation(libs.koin.compose)
+    implementation(libs.androidx.paging.compose)
+    implementation("io.coil-kt:coil-compose:2.6.0")
+    implementation("org.orbit-mvi:orbit-core:7.0.0")
+    implementation("org.orbit-mvi:orbit-viewmodel:7.0.0")
+    implementation("org.orbit-mvi:orbit-compose:7.0.0")
+
 
     //Module
-    implementation(project(":data"))
-    implementation(project(":domain"))
-    implementation(project(":feature:test"))
+    implementation(projects.domain)
+    implementation(projects.core)
 
 
 }
