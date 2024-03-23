@@ -14,28 +14,33 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.withContext
 
 class NarutoApi(private val client: HttpClient) {
     suspend fun getAllCharacters(): Flow<AllCharactersDto> = flow {
         emit(client.get("https://narutodb.xyz/api/character").body<AllCharactersDto>())
     }.flowOn(Dispatchers.IO)
 
-    suspend fun getAllCharactersPaged(page: Int = 0) = client.getResults<AllCharactersDto> {
-        url("https://narutodb.xyz/api/character?page=${page}&limit=10")
-        method = HttpMethod.Get
-    }
+    suspend fun getAllCharactersPaged(page: Int = 0) =
+        client.getResults<AllCharactersDto> {
+            url("https://narutodb.xyz/api/character?page=${page}&limit=10")
+            method = HttpMethod.Get
+        }
+
 }
 
 suspend inline fun <reified T> HttpClient.getResults(
-    block: HttpRequestBuilder.() -> Unit
-): Result<T> = try {
-    val response = request(block)
-    if (response.status == HttpStatusCode.OK) {
-        Result.Success(response.body())
-    } else {
-        Result.Error(Throwable("${response.status}: ${response.bodyAsText()}"))
+    crossinline block: HttpRequestBuilder.() -> Unit
+): Result<T> =
+    withContext(Dispatchers.IO) {
+        try {
+            val response = request(block)
+            if (response.status == HttpStatusCode.OK) {
+                Result.Success(response.body())
+            } else {
+                Result.Error(Throwable("${response.status}: ${response.bodyAsText()}"))
+            }
+        } catch (e: Exception) {
+            Result.Error(e)
+        }
     }
-} catch (e: Exception) {
-    Result.Error(e)
-}
-
